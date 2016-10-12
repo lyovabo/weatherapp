@@ -1,14 +1,26 @@
 class Controller {
-    this.templteUrl;
-    this.template;
-    constructor(url, nodeId) {
-        this.templteUrl = url;
-    }
-    this.loadTemplate() {
-        Loader.makeRequest('POST', this.templateUrl).then((response) => {
-            this.template = response;
-        })
+
+    constructor(templateName) {
+        console.log(templateName)
+        this.templateName = templateName;
 
     }
 
+    init() {
+        this.template = this.loadTemplate();
+    }
+    loadTemplate() {
+        return Loader.makeRequest('POST', './' + this.templateName);
+
+    }
+
+    getPath() {
+
+        let scripts = document.querySelectorAll('script[src]');
+        let currentScript = scripts[scripts.length - 1].src;
+        let currentScriptChunks = currentScript.split('/');
+        let currentScriptFile = currentScriptChunks[currentScriptChunks.length - 1];
+
+        return { 'path': currentScript.replace(currentScriptFile, ''), 'name': currentScriptFile };
+    }
 }

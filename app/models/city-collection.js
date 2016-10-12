@@ -1,1 +1,3 @@
-city - collection.js
+class CityCollection extends Collection {
+
+}
