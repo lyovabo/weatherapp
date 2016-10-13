@@ -9,6 +9,7 @@ gulp.task('watch', ['browserSync'], function() {
     gulp.watch('app/components/*.js', browserSync.reload);
     gulp.watch('app/services/*.js', browserSync.reload);
     gulp.watch('app/libs/*.js', browserSync.reload);
+    gulp.watch('app/*.js', browserSync.reload);
 
 });
 gulp.task('browserSync', function() {

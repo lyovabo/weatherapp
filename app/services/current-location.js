@@ -2,12 +2,13 @@ class CurrentLocation {
 
     static getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.showPosition);
+            return navigator.geolocation.getCurrentPosition(this.getPosition);
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
     }
-    static showPosition(position) {
-        console.log(position);
+    static getPosition(position) {
+        EventEmitter.emit('geoPosition', position);
     }
+
 }

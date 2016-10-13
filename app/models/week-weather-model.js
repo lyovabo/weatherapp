@@ -1,1 +1,10 @@
-week - weather - model.js
+class WeekWeatherModel {
+    this.today;
+    this.weekDayNames = [];
+    this.currentCity;
+    constructor() {
+
+    }
+
+
+}

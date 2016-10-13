@@ -1,28 +1,38 @@
 class EventEmitter {
-
-
-    constructor() {
-
+    static init() {
         this.topics = {};
         this.subUid = -1;
     }
-    emit(topic, args) {
-
+    static get topics() {
+        return this._topics;
+    }
+    static set topics(val) {
+        this._topics = val;
+    }
+    static get subUid() {
+        return this._subUid;
+    }
+    static set subUid(val) {
+        this._subUid = val;
+    }
+    static emit(topic, ...args) {
+        if (this.topics === undefined || this.subUid === undefined) {
+            this.init();
+        }
         if (!this.topics[topic]) {
             return false;
         }
-
         let subscribers = this.topics[topic];
         let len = subscribers ? subscribers.length : 0;
-
         while (len--) {
-            subscribers[len].func(topic, args);
+            subscribers[len].func(...args);
         }
-
         return this;
     }
-    on(topic, func) {
-
+    static on(topic, func) {
+        if (this.topics === undefined || this.subUid === undefined) {
+            this.init();
+        }
         if (!this.topics[topic]) {
             this.topics[topic] = [];
         }
@@ -32,10 +42,9 @@ class EventEmitter {
             token: token,
             func: func
         });
-        console.log('this.topics ', this.topics);
         return token;
     }
-    off(token) {
+    static off(token) {
         for (let m in this.topics) {
             if (this.topics[m]) {
                 for (let i = 0, j = this.topics[m].length; i < j; i++) {
