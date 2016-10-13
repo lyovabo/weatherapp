@@ -4,8 +4,11 @@ class Controller {
         console.log(templateName)
         this.templateName = templateName;
 
-    }
 
+    }
+    get name() {
+        this._name = this.constructor.name;
+    }
     init() {
         this.template = this.loadTemplate();
     }

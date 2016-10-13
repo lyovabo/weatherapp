@@ -1,7 +1,5 @@
-class City {
-    this.lattitude;
-    this.longitude;
-    this.name;
+class City extends EventEmitter {
+
     constructor(lattitude, longitude, name) {
         this.lattitude = lattitude;
         this.longitude = longitude;
